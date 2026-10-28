@@ -14,6 +14,7 @@ signature: jakubdrewniak
 
   const repo = 'https://github.com/jakubdrewniak/kb-4471/issues';
   const issues = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
+  issues.oneDay = issues['one-day'];
 </script>
 
 [#4471](/kb/incidents/4471) was merged by subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)),
@@ -21,12 +22,21 @@ so nobody read the bodies. Read by tenant, booking form and body, its reports ar
 with three different fixes. Each has its own ticket now.
 
 <Callout kind="warn">
-#4471 is not one known issue. Fixing the parser closes only the first row below.
+#4471 is not one known issue. Engineering closed it on 5 October with the parser fixed and booking-v3
+retired. That covers two of the three problems; the one-day move is still open.
 </Callout>
 
 ## What #4471 holds
 
 <ProblemTable ticket={4471} {issues} />
+
+## Where each one stands
+
+| problem | ticket | outcome |
+| --- | --- | --- |
+| `parser` | <a href={issues.parser}>#1</a> | fixed: `fix(dates): parse dd/mm for eu locales` · closed, completed |
+| `hint` | <a href={issues.hint}>#2</a> | won't fix: booking-v3 form retired · closed, not planned |
+| `one-day` | <a href={issues.oneDay}>#3</a> | open: neither change touches a date that moves by one day |
 
 ## The three problems
 
