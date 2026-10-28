@@ -4,7 +4,7 @@ title: '#4471 split · three problems, not one'
 owner: jakubdrewniak
 status: open
 reviewed: 2026-10-28
-signature: jakubdrewniak
+signature: v1.eyJzdWIiOiIxMzU3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjA4MzMsImV4cCI6MTc5MzMwNzIzM30.67Y7YlrGpNjE5yo9DwnItwLstymNM4e9urjbBnZkHX8
 ---
 
 <script>
