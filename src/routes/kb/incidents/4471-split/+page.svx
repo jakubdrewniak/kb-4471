@@ -41,12 +41,14 @@ from the tenant's locale.
 
 **`one-day`: the date moves by one day, not a swap.** Tuesday shows as Monday; one meeting is Tuesday
 in Lisbon and Monday in Toronto; an invite arrives before the booking was made. These look like a
-timezone or midnight-UTC bug. The desk had already read them this way (`desk-notes.json`) but
-filed them under `parser` by tenant.
+timezone or midnight-UTC bug. The desk had already read them this way (`desk-notes.json`); they
+stay filed and counted under `parser` by tenant, so this row overlaps the first.
 
 ## How to count
 
 - One id, one report: the export pages overlap, so some reports come twice.
+- Count a report where the desk files it, by cause. A one-day move is its own ticket, but the
+  desk still counts it under its cause.
 - Place a report by its tenant (locale and booking form), not by intake's tag. Intake guesses from
   the reporter's browser and gets it wrong for a tenant whose staff use another locale.
 - A subject line says how the reporter felt, not what broke. The same subject sits in all three rows.

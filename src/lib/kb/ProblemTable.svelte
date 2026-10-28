@@ -44,8 +44,11 @@
 </table>
 
 {#each groups as g (g.problem)}
-  {#if g.reports.length <= 10}
-    <p class="small"><code>{g.problem}</code>: {g.reports.map((r) => r.id).join(', ')}</p>
+  {#if g.filedUnder}
+    <p class="small">
+      <code>{g.problem}</code>: {g.reports.map((r) => r.id).join(', ')}. Filed and counted under
+      {#each g.filedUnder as c, i (c)}{i ? ', ' : ''}<code>{c}</code>{/each} as well, as the desk counts them.
+    </p>
   {/if}
 {/each}
 
