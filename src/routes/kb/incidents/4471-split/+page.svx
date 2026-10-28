@@ -1,0 +1,54 @@
+---
+layout: runbook
+title: '#4471 split · three problems, not one'
+owner: jakubdrewniak
+status: open
+reviewed: 2026-10-28
+signature: jakubdrewniak
+---
+
+<script>
+  import ProblemTable from '#lib/kb/ProblemTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const repo = 'https://github.com/jakubdrewniak/kb-4471/issues';
+  const issues = { parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` };
+</script>
+
+[#4471](/kb/incidents/4471) was merged by subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)),
+so nobody read the bodies. Read by tenant, booking form and body, its reports are three problems
+with three different fixes. Each has its own ticket now.
+
+<Callout kind="warn">
+#4471 is not one known issue. Fixing the parser closes only the first row below.
+</Callout>
+
+## What #4471 holds
+
+<ProblemTable ticket={4471} {issues} />
+
+## The three problems
+
+**`parser`: the shared parser reads every date month first.** Tenants whose locale writes the day
+first get the day and month swapped: 7 April goes out as 4 July. Every channel, every day-first
+tenant. Fix: parse in the tenant's locale.
+
+**`hint`: booking-v3 prints `MM/DD/YYYY` under its date field.** Only reports that come in through
+the form of a day-first tenant on booking-v3. People type what the hint says, month first, and the
+form reads it the tenant's way, day first. The parser fix does not touch this. Fix: print the hint
+from the tenant's locale.
+
+**`one-day`: the date moves by one day, not a swap.** Tuesday shows as Monday; one meeting is Tuesday
+in Lisbon and Monday in Toronto; an invite arrives before the booking was made. These look like a
+timezone or midnight-UTC bug. The desk had already read them this way (`desk-notes.json`) but
+filed them under `parser` by tenant.
+
+## How to count
+
+- One id, one report: the export pages overlap, so some reports come twice.
+- Place a report by its tenant (locale and booking form), not by intake's tag. Intake guesses from
+  the reporter's browser and gets it wrong for a tenant whose staff use another locale.
+- A subject line says how the reporter felt, not what broke. The same subject sits in all three rows.
+
+<RenderStamp {signature} />
